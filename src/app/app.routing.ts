@@ -6,14 +6,21 @@
 import { ModuleWithProviders } from '@angular/core/src/metadata/ng_module';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AboutComponent } from './about/about.component';
-import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './_guards/auth.guard';
+import { profileComponent } from './profile/profile.component';
+import { ResourceComponent } from './resource/resource.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 export const ROUTES: Routes = [
-    {path: '', redirectTo: 'home', pathMatch: 'full'},
-    {path: 'home', component: HomeComponent},
-    {path: 'about', component: AboutComponent}
+    {path: '', redirectTo: 'login', pathMatch: 'full'},
+    {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
+    {path: 'resource', component: ResourceComponent, canActivate: [AuthGuard]},
+    {path: 'sidenav', component: SidenavComponent, canActivate: [AuthGuard]},
+    {path: 'profile', component: profileComponent, canActivate: [AuthGuard]},
+    {path: 'login', component: LoginComponent}
 ];
 
 export const ROUTING: ModuleWithProviders = RouterModule.forRoot(ROUTES);

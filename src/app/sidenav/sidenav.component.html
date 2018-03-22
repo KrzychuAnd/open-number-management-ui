@@ -1,0 +1,12 @@
+<div *ngIf="isLoggedIn$ | async">
+  <nav class="sidenav">
+    <section class="sidenav-content">
+      <a href="#" [routerLink]="['/resource']" class="nav-link active">
+        Resources
+      </a>
+      <a href="#" [routerLink]="['/addResource']" class="nav-link">
+        Add Resources
+      </a>
+    </section>
+  </nav>
+</div>

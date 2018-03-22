@@ -1,0 +1,40 @@
+<form #f="ngForm">
+  <section class="form-block">
+    <label>My profile</label>
+    <div class="form-group">
+      <label for="id">Internal ID</label>
+      <input id="id" name="userid" type="text" size="50" [(ngModel)]="user.id" #idInput="ngModel" disabled>
+    </div>
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input id="firstName" name="userFirstName" type="text" size="50" [(ngModel)]="user.firstName" #firstNameInput="ngModel">
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input id="lastName" name="userLastName" type="text" size="50" [(ngModel)]="user.lastName" #lastNameInput="ngModel">
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" name="userEmail" type="text" size="50" [(ngModel)]="user.email" #emailInput="ngModel">
+    </div>
+    <div class="form-group">
+      <label for="roleName">Role</label>
+      <input id="roleName" name="userRoleName" type="text" size="50" [(ngModel)]="user.role.name" #roleNameInput="ngModel" disabled>
+      <button class="btn btn-sm btn-link" (click)="open = true">Permissions</button>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="save()">Save</button>
+  </section>
+</form>
+
+<clr-modal [(clrModalOpen)]="open">
+  <h3 class="modal-title">Your Role permissions</h3>
+  <div class="modal-body">
+    <p>Your role '{{user.role.name}}' give you access to the following permissions:</p>
+    <ul>
+      <li *ngFor="let permission of user.role.permissions">{{permission.name}} - {{permission.descr}}</li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="open = false">Ok</button>
+  </div>
+</clr-modal>

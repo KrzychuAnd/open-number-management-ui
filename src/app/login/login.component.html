@@ -1,0 +1,27 @@
+{{model | json}}
+{{error}}
+
+<div class="login-wrapper">
+  <form class="login" (ngSubmit)="login()" #f="ngForm">
+      <label class="title">
+          <h3 class="welcome">Welcome to</h3>
+          Open Number Management
+          <h5 class="hint">Use your Open NM User credential to sign in or create one now</h5>
+      </label>
+      <div class="login-group">
+          <input class="username" type="text" name="username" placeholder="Username" [(ngModel)]="model.username" #username="ngModel" required>
+          <input class="password" type="password" name="password" placeholder="Password" [(ngModel)]="model.password" #password="ngModel" required>
+          <div class="checkbox">
+              <input type="checkbox" id="rememberme">
+              <label for="rememberme">
+                  Remember me
+              </label>
+          </div>
+          <div [ngClass]="errorClass">
+              {{error}}
+          </div>
+          <button [disabled]="loading" type="submit" class="btn btn-primary">Login</button>
+          <a href="javascript://" class="signup">Sign up for a Company ID</a>
+      </div>
+  </form>
+</div>

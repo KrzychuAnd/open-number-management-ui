@@ -1,3 +1,4 @@
+import { RoleService } from './_services/role/role.service';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -6,14 +7,26 @@ import { HttpModule } from '@angular/http';
 import { ClarityModule } from '@clr/angular';
 import { AppComponent } from './app.component';
 import { ROUTING } from "./app.routing";
-import { HomeComponent } from "./home/home.component";
-import { AboutComponent } from "./about/about.component";
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from "./_guards/auth.guard";
+import { AuthenticationService } from "./_services/authentication/authentication.service";
+import { ResourceTypeService } from "./_services/resourceType/resource-type.service";
+import { UserService } from "./_services/user/user.service";
+import { HeaderComponent } from './header/header.component';
+import { profileComponent } from './profile/profile.component';
+import { ResourceComponent } from './resource/resource.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        AboutComponent,
-        HomeComponent
+        LoginComponent,
+        HeaderComponent,
+        profileComponent,
+        ResourceComponent,
+        SidenavComponent,
+        SettingsComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -23,7 +36,13 @@ import { AboutComponent } from "./about/about.component";
         ClarityModule,
         ROUTING
     ],
-    providers: [],
+    providers: [
+        AuthGuard,
+        AuthenticationService,
+        ResourceTypeService,
+        UserService,
+        RoleService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
