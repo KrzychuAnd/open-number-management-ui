@@ -9,7 +9,7 @@
     <a class="nav-link" href="#" [routerLink]="['/resource']" routerLinkActive="active">
       <span class="nav-text">Resources</span>
     </a>
-    <a class="nav-link" href="#" [routerLink]="['/settings']" routerLinkActive="active">
+    <a *ngIf="isAdminUser$ | async" class="nav-link" href="#" [routerLink]="['/settings']" routerLinkActive="active">
       <span class="nav-text">Settings</span>
     </a>
   </div>

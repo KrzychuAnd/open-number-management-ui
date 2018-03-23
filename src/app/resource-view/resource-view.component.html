@@ -1,0 +1,66 @@
+<table class="table">
+  <thead>
+      <tr>
+          <th>Resource Name</th>
+          <th>Resource Status</th>
+          <th>Description</th>
+          <th>Related Resource</th>
+          <th>Reserve</th>
+          <th>Edit</th>
+          <th>Retire</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let resource of resources">
+          <td>{{resource.name}}</td>
+          <td>{{resource.resourceStatus.name}}</td>
+          <td>{{resource.descr}}</td>
+          <td>{{resource.relatedResource?.name}}</td>
+          <td>
+            <button class="btn btn-sm" (click)="reserve = true">Reserve</button>
+          </td>
+          <td>
+            <button class="btn btn-sm" (click)="edit = true">Edit</button>
+          </td>
+          <td>
+            <button class="btn btn-sm" (click)="retire = true">Retire</button>
+          </td>
+      </tr>
+  </tbody>
+</table>
+
+<clr-modal [(clrModalOpen)]="reserve">
+  <h3 class="modal-title">Resource Reservation Confirmation</h3>
+  <div class="modal-body">
+    <p>Resource name: ??????</p>
+    
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline" type="button" (click)="reserve = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="reserve = false">Ok</button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="edit">
+  <h3 class="modal-title">Resource Edit</h3>
+  <div class="modal-body">
+    <p>Resource name: ????????</p>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline" type="button" (click)="edit = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="edit = false">Ok</button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="retire">
+  <h3 class="modal-title">Resource Retirement Confirmation</h3>
+  <div class="modal-body">
+    <p>Resource name: ???????</p>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline" type="button" (click)="retire = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="retire = false">Ok</button>
+  </div>
+</clr-modal>

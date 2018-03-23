@@ -1,3 +1,4 @@
+import { ResourceStatusService } from './_services/resourceStatus/resource-status.service';
 import { RoleService } from './_services/role/role.service';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,6 +18,9 @@ import { profileComponent } from './profile/profile.component';
 import { ResourceComponent } from './resource/resource.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { SettingsComponent } from './settings/settings.component';
+import { ResourceService } from './_services/resource/resource.service';
+import { AddResourceComponent } from './add-resource/add-resource.component';
+import { ResourceViewComponent } from './resource-view/resource-view.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +30,9 @@ import { SettingsComponent } from './settings/settings.component';
         profileComponent,
         ResourceComponent,
         SidenavComponent,
-        SettingsComponent
+        SettingsComponent,
+        AddResourceComponent,
+        ResourceViewComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -41,7 +47,9 @@ import { SettingsComponent } from './settings/settings.component';
         AuthenticationService,
         ResourceTypeService,
         UserService,
-        RoleService
+        RoleService,
+        ResourceService,
+        ResourceStatusService
     ],
     bootstrap: [AppComponent]
 })

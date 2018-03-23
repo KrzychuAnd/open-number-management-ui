@@ -15,9 +15,8 @@
         </div>
       </div>
       <div class="card-footer">
-        <button class="btn btn-sm btn-link">Delete</button>
-        <button class="btn btn-sm btn-link">Assigned Permissions</button>
-        <button class="btn btn-sm btn-link">Report</button>
+        <button class="btn btn-sm btn-link" [routerLink]="['/resourceView', {resTypeName: resourceType.name, pageSize: 10, pageNumber: 0}]">View</button>
+        <button class="btn btn-sm btn-link" [routerLink]="['/resourceView']">View Nested</button>
       </div>
     </div>
   </div>

@@ -10,6 +10,7 @@ import 'rxjs/add/operator/catch';
 export class AuthenticationService {
 
   private loggedIn = new BehaviorSubject<boolean>(false);
+  private adminUser = new BehaviorSubject<boolean>(false);
 
   url = "http://localhost:8080/oauth/token";
   client_id = "testjwtclientid";
@@ -26,6 +27,10 @@ export class AuthenticationService {
 
   get isLoggedIn() {
     return this.loggedIn.asObservable(); 
+  }
+
+  get isAdminUser(){
+    return this.adminUser.asObservable();
   }
 
   login(username: string, password: string): Observable<boolean> {
@@ -51,6 +56,8 @@ export class AuthenticationService {
           
           this.loggedIn.next(true);
 
+          this.adminUser.next(response.json().isAdminUser);
+
           this.user = response.json().user;
           // return true to indicate successful login
           return true;
@@ -64,6 +71,7 @@ export class AuthenticationService {
 
   logout() {
     this.loggedIn.next(false);
+    this.adminUser.next(false);
     // clear token remove user from local storage to log user out
     this.token = null;
     localStorage.removeItem('currentUser');
