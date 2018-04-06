@@ -15,12 +15,9 @@ import { ResourceTypeService } from "./_services/resourceType/resource-type.serv
 import { UserService } from "./_services/user/user.service";
 import { HeaderComponent } from './header/header.component';
 import { profileComponent } from './profile/profile.component';
-import { ResourceComponent } from './resource/resource.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ResourceService } from './_services/resource/resource.service';
-import { AddResourceComponent } from './add-resource/add-resource.component';
-import { ResourceViewComponent } from './resource-view/resource-view.component';
 
 @NgModule({
     declarations: [
@@ -28,11 +25,8 @@ import { ResourceViewComponent } from './resource-view/resource-view.component';
         LoginComponent,
         HeaderComponent,
         profileComponent,
-        ResourceComponent,
         SidenavComponent,
-        SettingsComponent,
-        AddResourceComponent,
-        ResourceViewComponent
+        SettingsComponent
     ],
     imports: [
         BrowserAnimationsModule,

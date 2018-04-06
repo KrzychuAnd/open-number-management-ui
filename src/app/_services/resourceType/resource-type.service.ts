@@ -48,4 +48,21 @@ export class ResourceTypeService {
         return jsonObject;
       });
   }
+
+  getResourceTypeByName(resTypeName: String): Observable<ResourceType> {
+    // add authorization header with jwt token
+    let headers: Headers = new Headers({
+      'Authorization': 'Bearer ' + this.authenticationService.token,
+      'Content-Type': 'application/json'
+    });
+
+    let options = new RequestOptions({ headers: headers });
+
+    // get resource types from api
+    return this.http.get('http://localhost:8080/v1/resourceTypes/search/getResourceTypeByName?name=' + resTypeName, options).map(
+      (response: Response) => {
+        let jsonObject = response.json();
+        return jsonObject;
+      });
+  }  
 }

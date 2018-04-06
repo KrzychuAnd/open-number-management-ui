@@ -6,7 +6,7 @@
     </a>
   </div>
   <div *ngIf="isLoggedIn$ | async" class="header-nav" [clr-nav-level]="1">
-    <a class="nav-link" href="#" [routerLink]="['/resource']" routerLinkActive="active">
+    <a class="nav-link" href="#" [routerLink]="['/resources']" routerLinkActive="active">
       <span class="nav-text">Resources</span>
     </a>
     <a *ngIf="isAdminUser$ | async" class="nav-link" href="#" [routerLink]="['/settings']" routerLinkActive="active">

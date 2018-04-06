@@ -15,8 +15,7 @@
         </div>
       </div>
       <div class="card-footer">
-        <button class="btn btn-sm btn-link" [routerLink]="['/resourceView', {resTypeName: resourceType.name, pageSize: 10, pageNumber: 0}]">View</button>
-        <button class="btn btn-sm btn-link" [routerLink]="['/resourceView']">View Nested</button>
+        <button class="btn btn-sm btn-link" routerLink="resTypeName/{{resourceType.name}}/pageNum/0/pageSize/10">View</button>
       </div>
     </div>
   </div>

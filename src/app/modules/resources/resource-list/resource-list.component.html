@@ -1,0 +1,30 @@
+<clr-datagrid>
+  <clr-dg-column [clrDgField]="'name'">Resource Name</clr-dg-column>
+  <clr-dg-column [clrDgField]="'resourceStatus.name'">
+    <ng-container *clrDgHideableColumn="{hidden: false}">Resource Status</ng-container>
+  </clr-dg-column>
+  <clr-dg-column [clrDgField]="'descr'">
+    <ng-container *clrDgHideableColumn="{hidden: false}">Description</ng-container>
+  </clr-dg-column>
+  <clr-dg-column [clrDgField]="'relatedResource.name'">
+    <ng-container *clrDgHideableColumn="{hidden: false}">Related Resource</ng-container>
+  </clr-dg-column>
+  <clr-dg-column>Action</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let resource of resources">
+    <clr-dg-cell>{{resource.name}}</clr-dg-cell>
+    <clr-dg-cell>{{resource.resourceStatus.name}}</clr-dg-cell>
+    <clr-dg-cell>{{resource.descr}}</clr-dg-cell>
+    <clr-dg-cell>{{resource.relatedResource?.name}}</clr-dg-cell>
+    <clr-dg-cell>
+      <button class="btn btn-sm" (click)="reserve = true">Reserve</button>
+      <button class="btn btn-sm" routerLink="/resources/resName/{{resource.name}}">Edit</button>
+      <button class="btn btn-sm" (click)="retire = true">Retire</button>
+    </clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>
+    {{page.number * page.size + 1}} - {{(page.number + 1) * page.size}} of {{page.totalElements}} resources
+    <a *ngFor="let i of pageArray; let index = index" routerLink="/resources/resTypeName/{{resourceType.name}}/pageNum/{{index + 1}}/pageSize/{{page.size}}">{{index + 1}} </a>
+  </clr-dg-footer>
+</clr-datagrid>

@@ -1,0 +1,11 @@
+<h3 highlight>Resource Detail</h3>
+<div *ngIf="resource">
+  <div>Name: {{resource.name}}</div><br>
+  <div>Descr: {{resource.descr}}</div><br>
+  <div>Status: {{resource.resourceStatus.name}}</div><br>
+  <div>Related Resource Name: {{resource.relatedResource?.name}}</div><br>
+  <ul *ngFor='let resourceHistory of resource.resourceHistories'>
+    <li>{{resourceHistory.sourceStatusId}} - {{resourceHistory.targetStatusId}} - ...</li>
+  </ul>
+</div>
+<br>
