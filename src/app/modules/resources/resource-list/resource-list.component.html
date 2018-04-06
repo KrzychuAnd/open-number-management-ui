@@ -24,7 +24,9 @@
   </clr-dg-row>
 
   <clr-dg-footer>
-    {{page.number * page.size + 1}} - {{(page.number + 1) * page.size}} of {{page.totalElements}} resources
-    <a *ngFor="let i of pageArray; let index = index" routerLink="/resources/resTypeName/{{resourceType.name}}/pageNum/{{index + 1}}/pageSize/{{page.size}}">{{index + 1}} </a>
+    {{page.number * page.size + 1}} - {{(page.number + 1) * page.size}} of {{page.totalElements}} resources &nbsp;&nbsp;&nbsp;&nbsp;
+    <a *ngIf="page.number > 0" routerLink="/resources/resTypeName/{{resourceType.name}}/pageNum/{{page.number - 1}}/pageSize/{{page.size}}">Previous </a>
+    <a *ngFor="let i of pageArray; let index = index" routerLink="/resources/resTypeName/{{resourceType.name}}/pageNum/{{index}}/pageSize/{{page.size}}">{{index + 1}} </a>
+    <a *ngIf="page.number <= page.totalPages - 2" routerLink="/resources/resTypeName/{{resourceType.name}}/pageNum/{{page.number + 1}}/pageSize/{{page.size}}">Next </a>
   </clr-dg-footer>
 </clr-datagrid>

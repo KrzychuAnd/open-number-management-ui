@@ -13,6 +13,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./resource-list.component.scss']
 })
 export class ResourceListComponent implements OnInit {
+  private parametersObservable: any;
+
   resourceType: ResourceType = new ResourceType();
   page: Page = new Page();
   resources: Resource[] = new Array<Resource>();
@@ -21,20 +23,20 @@ export class ResourceListComponent implements OnInit {
   constructor(private route: ActivatedRoute, private resourceService: ResourceService, private resourceTypeService: ResourceTypeService) {}
 
   ngOnInit() {
-    console.log("Krzychu ngOnInit ResourceListComponent!");
-    let resTypeName = this.route.snapshot.paramMap.get('resTypeName');
-    let pageNum = parseInt(this.route.snapshot.paramMap.get('pageNum'), 10);
-    let pageSize = parseInt(this.route.snapshot.paramMap.get('pageSize'), 10);
-
-    console.log("Krzychu name: " + resTypeName + ", pageNum: " + pageNum + ", pageSize: " + pageSize);
-
-    this.resourceTypeService.getResourceTypeByName(resTypeName).subscribe(response => this.resourceType = response);
-
-    this.resourceService.getResourcesByResTypeName(resTypeName, pageNum, pageSize).subscribe(response => {
-      this.resources = response.resources;
-      this.page = response.page;
-      this.pageArray = new Array(this.page.totalPages);
+    this.parametersObservable = this.route.params.subscribe(params => {
+      let resTypeName = this.route.snapshot.paramMap.get('resTypeName');
+      let pageNum = parseInt(this.route.snapshot.paramMap.get('pageNum'), 10);
+      let pageSize = parseInt(this.route.snapshot.paramMap.get('pageSize'), 10);
+  
+      this.resourceTypeService.getResourceTypeByName(resTypeName).subscribe(response => this.resourceType = response);
+  
+      this.resourceService.getResourcesByResTypeName(resTypeName, pageNum, pageSize).subscribe(response => {
+        this.resources = response.resources;
+        this.page = response.page;
+        this.pageArray = new Array(this.page.totalPages);
+      });      
     });
+
   }
 
 }
