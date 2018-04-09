@@ -2,7 +2,7 @@ import { ResourceTypeService } from './../../../_services/resourceType/resource-
 import { ResourceType } from './../../../_models/resource_type/resource-type';
 import { ResourceService } from './../../../_services/resource/resource.service';
 import { AuthenticationService } from './../../../_services/authentication/authentication.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Resource } from './../../../_models/resource/resource';
 import { Page } from './../../../_models/page/page';
 import { Component, OnInit } from '@angular/core';
@@ -20,7 +20,7 @@ export class ResourceListComponent implements OnInit {
   resources: Resource[] = new Array<Resource>();
   pageArray = new Array();
 
-  constructor(private route: ActivatedRoute, private resourceService: ResourceService, private resourceTypeService: ResourceTypeService) {}
+  constructor(private route: ActivatedRoute, private resourceService: ResourceService, private resourceTypeService: ResourceTypeService, private router: Router) {}
 
   ngOnInit() {
     this.parametersObservable = this.route.params.subscribe(params => {
@@ -37,6 +37,10 @@ export class ResourceListComponent implements OnInit {
       });      
     });
 
+  }
+
+  goBack() {
+    this.router.navigate(['/resources']);
   }
 
 }

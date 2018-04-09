@@ -15,7 +15,6 @@ import { ResourceTypeService } from "./_services/resourceType/resource-type.serv
 import { UserService } from "./_services/user/user.service";
 import { HeaderComponent } from './header/header.component';
 import { profileComponent } from './profile/profile.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ResourceService } from './_services/resource/resource.service';
 
@@ -25,7 +24,6 @@ import { ResourceService } from './_services/resource/resource.service';
         LoginComponent,
         HeaderComponent,
         profileComponent,
-        SidenavComponent,
         SettingsComponent
     ],
     imports: [

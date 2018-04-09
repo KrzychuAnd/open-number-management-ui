@@ -10,7 +10,7 @@ export class ResourceStatusService {
   constructor(private http: Http,
     private authenticationService: AuthenticationService) { }
 
-    getResourceStatuse(): Observable<any> {
+    getResourceStatuses(): Observable<any> {
       // add authorization header with jwt token
       let headers: Headers = new Headers({
         'Authorization': 'Bearer ' + this.authenticationService.token,

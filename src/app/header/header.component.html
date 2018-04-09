@@ -1,6 +1,6 @@
 <clr-header>
   <div class="branding">
-    <a href="#" class="nav-link">
+    <a href="#" [routerLink]="['/resources']" class="nav-link">
       <span class="clr-icon clr-clarity-logo"></span>
       <span class="title">Open NM</span>
     </a>
@@ -12,6 +12,11 @@
     <a *ngIf="isAdminUser$ | async" class="nav-link" href="#" [routerLink]="['/settings']" routerLinkActive="active">
       <span class="nav-text">Settings</span>
     </a>
+    <form *ngIf="isLoggedIn$ | async" (ngSubmit)="search()" class="search" #f="ngForm">
+        <label for="searchInput">
+            <input name="searchInput" type="text" placeholder="Search for resource..." [(ngModel)]="searchInput" required>
+        </label>
+    </form>
   </div>
   <div *ngIf="isLoggedIn$ | async" class="header-actions">
     <clr-dropdown>
@@ -21,8 +26,25 @@
       </button>
       <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
         <a href="#" clrDropdownItem [routerLink]="['/profile']" routerLinkActive="active">My profile</a>
+        <a href="#" clrDropdownItem [routerLink]="['/about']" routerLinkActive="active">About</a>
         <a href="#" clrDropdownItem [routerLink]="['/login']" routerLinkActive="active">Log out</a>
       </clr-dropdown-menu>
     </clr-dropdown>
   </div>
 </clr-header>
+
+<div *ngIf="error" class="alert alert-danger">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+            <span class="alert-text">
+                {{error}}
+            </span>
+        </div>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="closeError()">
+        <clr-icon aria-hidden="true" shape="close"></clr-icon>
+    </button>
+</div>

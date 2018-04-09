@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,10 +11,16 @@ import { ResourceTypeListComponent } from './resource-type-list/resource-type-li
 
 @NgModule({
   imports: [
+    FormsModule,
     CommonModule,
     ResourcesRoutingModule,
     ClarityModule
   ],
-  declarations: [ResourceListComponent, ResourceEditComponent, ResourcesComponent, ResourceTypeListComponent]
+  declarations: [
+    ResourceListComponent, 
+    ResourceEditComponent, 
+    ResourcesComponent, 
+    ResourceTypeListComponent
+  ]
 })
 export class ResourcesModule { }
