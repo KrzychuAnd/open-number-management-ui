@@ -1,59 +1,75 @@
+<div *ngIf="alertMessage" [ngClass]="alertClass">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+            </div>
+            <span class="alert-text">
+                {{alertMessage}}
+            </span>
+        </div>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+        <clr-icon aria-hidden="true" shape="close"></clr-icon>
+    </button>
+</div>
 <h3 highlight>Edit Resource</h3>
 
 <div *ngIf="resource">
-  <div>Name: {{resource.name}}</div>
-  <br>
-  <div>Descr: {{resource.descr}}</div>
-  <br>
-  <div>Status: {{resource.resourceStatus.name}}</div>
-  <br>
-  <div>Related Resource Name: {{resource.relatedResource?.name}}</div>
-  <br>
+    <form #f="ngForm">
+        <section class="form-block">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="resourceName" placeholder="Enter value here" size="50" [(ngModel)]="resource.name" #resourceName="ngModel"
+                    disabled>
+            </div>
+            <div class="form-group">
+                <label for="descr">Description:</label>
+                <input type="text" id="descr" name="resourceDescr" placeholder="Enter value here" size="50" [(ngModel)]="resource.descr"
+                    #resourceDescr="ngModel">
+            </div>
+            <div class="form-group">
+                <label for="type">Type:</label>
+                <input type="text" id="type" name="resourceType" placeholder="Enter value here" size="50" [(ngModel)]="resource.resourceType.descr"
+                    #resourceType="ngModel" disabled>
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <div class="select">
+                    <select id="status" name="resourceStatus" [ngModel]="currentResourceStatus" #resourceStatus="ngModel" (change)="resourceStatusChange(resourceStatus.value)">
+                        <option *ngFor="let resourceStatus of resourceStatuses" [ngValue]="resourceStatus">{{resourceStatus.descr}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="type">Related Resource:</label>
+                <input type="text" id="related" name="relatedResource" placeholder="Enter value here" size="50" [(ngModel)]="resource.relatedResource.name"
+                    #relatedResource="ngModel" disabled>
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="save()">Save</button>
+        </section>
+    </form>
 
-  <form #f="ngForm">
-      <section class="form-block">
-          <div class="form-group">
-              <label for="name">Name:</label>
-              <input type="text" id="name" name="resourceName" placeholder="Enter value here" size="50" [(ngModel)]="resource.name" #resourceName="ngModel" disabled>
-          </div>
-          <div class="form-group">
-              <label for="descr">Description</label>
-              <input type="text" id="descr" name="resourceDescr" placeholder="Enter value here" size="50" [(ngModel)]="resource.descr" #resourceDescr="ngModel">
-          </div>
-          <div class="form-group">
-              <label for="status">Status</label>
-              <div class="select">
-                  <select id="status" [ngModel]="resource.resourceStatus">
-                      <option *ngFor="let resourceStatus of resourceStatuses" [ngValue]="resourceStatus">{{resourceStatus.descr}}</option>
-                  </select>
-              </div>
-          </div>
+    <clr-datagrid>
+        <clr-dg-column>Source Status</clr-dg-column>
+        <clr-dg-column>Target Status</clr-dg-column>
+        <clr-dg-column>Old Related Resource</clr-dg-column>
+        <clr-dg-column>New Related Resource</clr-dg-column>
+        <clr-dg-column>Old Description</clr-dg-column>
+        <clr-dg-column>New Description</clr-dg-column>
 
-          <button type="submit" class="btn btn-primary">Button</button>
-      </section>
-  </form>
+        <clr-dg-row *clrDgItems="let resourceHistory of resource.resourceHistories">
+            <clr-dg-cell>{{resourceHistory.sourceStatusId}}</clr-dg-cell>
+            <clr-dg-cell>{{resourceHistory.targetStatusId}}</clr-dg-cell>
+            <clr-dg-cell>{{resourceHistory.oldRelResId}}</clr-dg-cell>
+            <clr-dg-cell>{{resourceHistory.newRelResId}}</clr-dg-cell>
+            <clr-dg-cell>{{resourceHistory.oldDescr}}</clr-dg-cell>
+            <clr-dg-cell>{{resourceHistory.newDescr}}</clr-dg-cell>
+        </clr-dg-row>
 
-
-  <clr-datagrid>
-    <clr-dg-column>Source Status</clr-dg-column>
-    <clr-dg-column>Target Status</clr-dg-column>
-    <clr-dg-column>Old Related Resource</clr-dg-column>
-    <clr-dg-column>New Related Resource</clr-dg-column>
-    <clr-dg-column>Old Description</clr-dg-column>
-    <clr-dg-column>New Description</clr-dg-column>
-
-    <clr-dg-row *clrDgItems="let resourceHistory of resource.resourceHistories">
-      <clr-dg-cell>{{resourceHistory.sourceStatusId}}</clr-dg-cell>
-      <clr-dg-cell>{{resourceHistory.targetStatusId}}</clr-dg-cell>
-      <clr-dg-cell>{{resourceHistory.oldRelResId}}</clr-dg-cell>
-      <clr-dg-cell>{{resourceHistory.newRelResId}}</clr-dg-cell>
-      <clr-dg-cell>{{resourceHistory.oldDescr}}</clr-dg-cell>
-      <clr-dg-cell>{{resourceHistory.newDescr}}</clr-dg-cell>
-    </clr-dg-row>
-
-    <clr-dg-footer>{{resource.resourceHistories.length}} hitory entries</clr-dg-footer>
-  </clr-datagrid>
+        <clr-dg-footer>{{resource.resourceHistories.length}} hitory entries</clr-dg-footer>
+    </clr-datagrid>
 </div>
 <p>
     <button class="btn btn-primary" (click)="goBack()">Back</button>
-  </p>
+</p>

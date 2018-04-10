@@ -78,4 +78,29 @@ export class ResourceService {
         return jsonObject;
       });
   }
+
+
+  patchResource(resource: Resource): Observable<Resource> {
+    // add authorization header with jwt token
+    let headers: Headers = new Headers({
+      'Authorization': 'Bearer ' + this.authenticationService.token,
+      'Content-Type': 'application/json'
+    });
+
+    let options = new RequestOptions({ headers: headers });
+    let jsonBody: any;
+
+    jsonBody = {
+      "resStatusName": resource.resourceStatus.name,
+      "descr": resource.descr
+    };
+
+    console.log("Krzychu jsonBody: " + JSON.stringify(jsonBody));
+    // get resource types from api
+    return this.http.patch('http://localhost:8080/v1/resources/' + resource.id, JSON.stringify(jsonBody), options).map(
+      (response: Response) => {
+        let jsonObject = response.json();
+        return jsonObject;
+      });
+  }  
 }

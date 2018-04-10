@@ -1,3 +1,4 @@
+import { ResourceLifecycleService } from './_services/resourceLifecycle/resource-lifecycle.service';
 import { ResourceStatusService } from './_services/resourceStatus/resource-status.service';
 import { RoleService } from './_services/role/role.service';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -41,7 +42,8 @@ import { ResourceService } from './_services/resource/resource.service';
         UserService,
         RoleService,
         ResourceService,
-        ResourceStatusService
+        ResourceStatusService,
+        ResourceLifecycleService
     ],
     bootstrap: [AppComponent]
 })
