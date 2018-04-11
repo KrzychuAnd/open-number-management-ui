@@ -79,6 +79,44 @@ export class ResourceService {
       });
   }
 
+  reserveResource(resource: Resource): Observable<Resource> {
+    // add authorization header with jwt token
+    let headers: Headers = new Headers({
+      'Authorization': 'Bearer ' + this.authenticationService.token,
+      'Content-Type': 'application/json'
+    });
+
+    let options = new RequestOptions({ headers: headers });
+    let jsonBody: any;
+
+    jsonBody = {
+      "resStatusName": "RESERVED"
+    };
+
+    console.log("Krzychu jsonBody: " + JSON.stringify(jsonBody));
+    return this.http.patch('http://localhost:8080/v1/resources/' + resource.id, JSON.stringify(jsonBody), options).map(
+      (response: Response) => {
+        let jsonObject = response.json();
+        return jsonObject;
+      });
+  }  
+
+  retireResource(resource: Resource): Observable<Resource> {
+    // add authorization header with jwt token
+    let headers: Headers = new Headers({
+      'Authorization': 'Bearer ' + this.authenticationService.token,
+      'Content-Type': 'application/json'
+    });
+
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.patch('http://localhost:8080/v1/resources/retire/' + resource.name, null, options).map(
+      (response: Response) => {
+        let jsonObject = response.json();
+        return jsonObject;
+      });
+  }  
+
   patchResource(resource: Resource): Observable<Resource> {
     // add authorization header with jwt token
     let headers: Headers = new Headers({

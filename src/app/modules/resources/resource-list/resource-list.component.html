@@ -1,3 +1,19 @@
+<div *ngIf="alertMessage" [ngClass]="alertClass">
+  <div class="alert-items">
+      <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+              <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+          </div>
+          <span class="alert-text">
+              {{alertMessage}}
+          </span>
+      </div>
+  </div>
+  <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+      <clr-icon aria-hidden="true" shape="close"></clr-icon>
+  </button>
+</div>
+
 <h3 highlight>List of '{{resourceType.descr}}' Resources</h3>
 
 <clr-datagrid>
@@ -19,9 +35,9 @@
     <clr-dg-cell>{{resource.descr}}</clr-dg-cell>
     <clr-dg-cell>{{resource.relatedResource?.name}}</clr-dg-cell>
     <clr-dg-cell>
-      <button class="btn btn-sm" (click)="reserve = true">Reserve</button>
+      <button *ngIf="resource.resourceStatus.name == 'AVAILABLE'" class="btn btn-sm" (click)="reserveModal(resource)">Reserve</button>
       <button class="btn btn-sm" routerLink="/resources/list/resName/{{resource.name}}">Edit</button>
-      <button class="btn btn-sm" (click)="retire = true">Retire</button>
+      <button *ngIf="resource.resourceStatus.name != 'RETIRED'" class="btn btn-sm" (click)="retireModal(resource)">Retire</button>
     </clr-dg-cell>
   </clr-dg-row>
 
@@ -35,3 +51,26 @@
 <p>
   <button class="btn btn-primary" (click)="goBack()">Back</button>
 </p>
+
+<clr-modal [(clrModalOpen)]="reserveConfirmModal">
+  <h3 class="modal-title">Reserve confirmation</h3>
+  <div class="modal-body">
+    <p>Please confirm you want reserve '{{selResource?.name}}'</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="reserveConfirmModal = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="reserveResource(selResource)">Ok</button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="retireConfirmModal">
+  <h3 class="modal-title">Retire confirmation</h3>
+  <div class="modal-body">
+    <p>Please confirm you want retire '{{selResource?.name}}'</p>
+    <p>Plese note that this is final status with no possibility to change back to any other status.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="retireConfirmModal = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="retireResource(selResource)">Ok</button>
+  </div>
+</clr-modal>

@@ -19,11 +19,17 @@ export class ResourceListComponent implements OnInit {
   page: Page = new Page();
   resources: Resource[] = new Array<Resource>();
   pageArray = new Array();
+  reserveConfirmModal = false;
+  retireConfirmModal = false;
+  selResource: Resource;
+  alertMessage: String;
+  alertClass: String;
 
   constructor(private route: ActivatedRoute, private resourceService: ResourceService, private resourceTypeService: ResourceTypeService, private router: Router) {}
 
   ngOnInit() {
     this.parametersObservable = this.route.params.subscribe(params => {
+      console.log("observable!!!!");
       let resTypeName = this.route.snapshot.paramMap.get('resTypeName');
       let pageNum = parseInt(this.route.snapshot.paramMap.get('pageNum'), 10);
       let pageSize = parseInt(this.route.snapshot.paramMap.get('pageSize'), 10);
@@ -39,8 +45,67 @@ export class ResourceListComponent implements OnInit {
 
   }
 
+  ngOnDestroy() {
+    this.alertMessage = "";
+  }
+
   goBack() {
+    this.alertMessage = "";
     this.router.navigate(['/resources/list']);
+  }
+
+  reserveModal(resource){
+    this.selResource = resource;
+    this.reserveConfirmModal = true;
+  }
+
+  retireModal(resource){
+    this.selResource = resource;
+    this.retireConfirmModal = true;
+  }
+
+  reserveResource(resource){
+    console.log("reserve resource with name: " + resource.name);
+    this.resourceService.reserveResource(resource).subscribe(response => {
+      this.resources.forEach(res => {
+        if (res.name == resource.name ){
+          res = response;
+          console.log("update resource: " + res.resourceStatus.name);
+          console.log("TO DO!! Refresh grid by new status of changed resource status!!");
+        }
+      });
+      this.alertMessage = "Resource '" + resource.name + "' moved to Resrved state";
+      this.alertClass = "alert alert-success";
+    }, err => {
+      this.alertMessage = err.json().message;
+      this.alertClass = "alert alert-danger";
+    });
+
+    this.reserveConfirmModal = false;
+  }
+
+  retireResource(resource){
+    console.log("retire resource with name: " + resource.name);
+    this.resourceService.retireResource(resource).subscribe(response => {
+      this.resources.forEach(res => {
+        if (res.name == resource.name ){
+          res = response;
+          console.log("update resource: " + res.resourceStatus.name);
+          console.log("TO DO!! Refresh grid by new status of changed resource status!!");
+        }
+      });
+      this.alertMessage = "Resource '" + resource.name + "' moved to Retired";
+      this.alertClass = "alert alert-success";
+    }, err => {
+      this.alertMessage = err.json().message;
+      this.alertClass = "alert alert-danger";
+    });
+
+    this.retireConfirmModal = false;
+  }
+
+  closeAlert() {
+    this.alertMessage = "";
   }
 
 }

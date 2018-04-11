@@ -81,7 +81,6 @@ export class ResourceEditComponent implements OnInit, OnDestroy {
   }
 
   resourceStatusChange(resourceStatus){
-    console.log("resourceStatusChange " + resourceStatus.name);
     this.resource.resourceStatus.name = resourceStatus.name;
     this.resource.resourceStatus.descr = resourceStatus.descr;
   }

@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
     console.log("Krzychu search input: " + this.searchInput);
     this.resourceService.getResourceByName(this.searchInput).subscribe(response => {
       this.error = '';
-      this.router.navigate(['/resources/resName/' + this.searchInput]);
+      this.router.navigate(['/resources/list/resName/' + this.searchInput]);
     }, err => {
       if (err.status == 404) {
         this.error = "Resource with name " + this.searchInput + " does not exists.";
