@@ -8,6 +8,7 @@ import { ResourceListComponent } from './resource-list/resource-list.component';
 import { ResourceEditComponent } from './resource-edit/resource-edit.component';
 import { ResourcesComponent } from './resources.component';
 import { ResourceTypeListComponent } from './resource-type-list/resource-type-list.component';
+import { ResourceManageComponent } from './resource-manage/resource-manage.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { ResourceTypeListComponent } from './resource-type-list/resource-type-li
     ResourceListComponent, 
     ResourceEditComponent, 
     ResourcesComponent, 
-    ResourceTypeListComponent
+    ResourceTypeListComponent, ResourceManageComponent
   ]
 })
 export class ResourcesModule { }

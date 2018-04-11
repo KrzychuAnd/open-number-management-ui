@@ -1,6 +1,6 @@
 <div class="row">
   <div *ngFor="let resourceType of resourceTypes" class="col-lg-5 col-md-6 col-sm-12 col-xs">
-    <div class="card">
+    <div class="card clickable" routerLink="resTypeName/{{resourceType.name}}/pageNum/0/pageSize/10">
       <div class="card-header">
         {{resourceType.name}}
       </div>
@@ -15,7 +15,9 @@
         </div>
       </div>
       <div class="card-footer">
-        <button class="btn btn-sm btn-link" routerLink="resTypeName/{{resourceType.name}}/pageNum/0/pageSize/10">View</button>
+        <div class="card-text">
+          Number of Resources: {{reportHash.get(resourceType.name)}}
+        </div>
       </div>
     </div>
   </div>

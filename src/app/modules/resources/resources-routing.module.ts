@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ResourceListComponent } from './resource-list/resource-list.component';
 import { ResourceEditComponent } from './resource-edit/resource-edit.component';
 import { ResourceTypeListComponent } from './resource-type-list/resource-type-list.component';
+import { ResourceManageComponent } from './resource-manage/resource-manage.component';
 
 const routes: Routes = [
   {
@@ -12,8 +13,10 @@ const routes: Routes = [
     component: ResourcesComponent,
     children: [
       {path: '', component: ResourceTypeListComponent},
-      {path: 'resTypeName/:resTypeName/pageNum/:pageNum/pageSize/:pageSize', component: ResourceListComponent},
-      {path: 'resName/:resName', component: ResourceEditComponent}
+      {path: 'list', component: ResourceTypeListComponent},
+      {path: 'list/resTypeName/:resTypeName/pageNum/:pageNum/pageSize/:pageSize', component: ResourceListComponent},
+      {path: 'list/resName/:resName', component: ResourceEditComponent},
+      {path: 'resource-manage', component: ResourceManageComponent}
     ],
     canActivate: [AuthGuard]
   }

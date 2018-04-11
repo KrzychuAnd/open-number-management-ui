@@ -79,7 +79,6 @@ export class ResourceService {
       });
   }
 
-
   patchResource(resource: Resource): Observable<Resource> {
     // add authorization header with jwt token
     let headers: Headers = new Headers({
@@ -103,4 +102,21 @@ export class ResourceService {
         return jsonObject;
       });
   }  
+
+  getResourcesReport(): Observable<any> {
+    // add authorization header with jwt token
+    let headers: Headers = new Headers({
+      'Authorization': 'Bearer ' + this.authenticationService.token,
+      'Content-Type': 'application/json'
+    });
+
+    let options = new RequestOptions({ headers: headers });
+
+    // get resource types from api
+    return this.http.get('http://localhost:8080/v1/resources/report', options).map(
+      (response: Response) => {
+        let jsonObject = response.json();
+        return jsonObject;
+      });
+  }
 }

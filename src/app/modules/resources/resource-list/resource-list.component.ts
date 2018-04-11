@@ -40,7 +40,7 @@ export class ResourceListComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/resources']);
+    this.router.navigate(['/resources/list']);
   }
 
 }

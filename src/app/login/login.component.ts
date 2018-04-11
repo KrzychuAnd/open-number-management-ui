@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.model.username, this.model.password)
       .subscribe(result => {
         if (result === true) {
-          this.router.navigate(['/resources']);
+          this.router.navigate(['/resources/list']);
         } else {
           this.error = "User name or password invalid";
           this.loading = false;
