@@ -60,6 +60,7 @@ export class ResourceEditComponent implements OnInit, OnDestroy {
     console.log("Save - TO DO if resource changed!!!!");
     this.resourceService.patchResource(this.resource).subscribe(response => {
       this.resource.resourceHistories = response.resourceHistories;
+      this.resource.resourceHistories.forEach(resourceHistory => console.log(resourceHistory));
       this.resourceLifecycleService.getTargetResStatBySourceStatName(this.resource.resourceStatus.name).subscribe(response => {
         this.resourceStatuses = response;
         this.currentResourceStatus = new ResourceStatus();

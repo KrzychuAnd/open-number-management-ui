@@ -57,14 +57,18 @@
         <clr-dg-column>New Related Resource</clr-dg-column>
         <clr-dg-column>Old Description</clr-dg-column>
         <clr-dg-column>New Description</clr-dg-column>
+        <clr-dg-column>Added by</clr-dg-column>
+        <clr-dg-column>Added Date</clr-dg-column>
 
         <clr-dg-row *clrDgItems="let resourceHistory of resource.resourceHistories">
-            <clr-dg-cell>{{resourceHistory.sourceStatusId}}</clr-dg-cell>
-            <clr-dg-cell>{{resourceHistory.targetStatusId}}</clr-dg-cell>
-            <clr-dg-cell>{{resourceHistory.oldRelResId}}</clr-dg-cell>
-            <clr-dg-cell>{{resourceHistory.newRelResId}}</clr-dg-cell>
+            <clr-dg-cell>{{resourceHistory.sourceStatus?.descr}}</clr-dg-cell>
+            <clr-dg-cell>{{resourceHistory.targetStatus?.descr}}</clr-dg-cell>
+            <clr-dg-cell>{{resourceHistory.oldRelatedResource?.name}}</clr-dg-cell>
+            <clr-dg-cell>{{resourceHistory.newRelatedResource?.name}}</clr-dg-cell>
             <clr-dg-cell>{{resourceHistory.oldDescr}}</clr-dg-cell>
             <clr-dg-cell>{{resourceHistory.newDescr}}</clr-dg-cell>
+            <clr-dg-cell>{{resourceHistory.rowAddedUser}}</clr-dg-cell>
+            <clr-dg-cell>{{resourceHistory.rowAddedDttm | date: 'dd/MM/yyyy'}}</clr-dg-cell>
         </clr-dg-row>
 
         <clr-dg-footer>{{resource.resourceHistories.length}} hitory entries</clr-dg-footer>
